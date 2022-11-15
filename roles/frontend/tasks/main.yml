@@ -3,4 +3,8 @@
     name: nginx
     state: installed
 
+- name: nginx
+  ansible.builtin.systemd:
+    state: started
+    name: nginx
 
