@@ -18,4 +18,10 @@
     path: /usr/share/nginx/html
     state: absent
 
+- name: Unarchive a file that needs to be downloaded and extract also
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
 
