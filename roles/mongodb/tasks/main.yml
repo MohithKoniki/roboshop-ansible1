@@ -1,0 +1,27 @@
+- name: mongodb repo
+  ansible.nuiltin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: install mongodb
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+
+- name: update ip address
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: 127.0.0.1
+    replace: 0.0.0.0
+
+- name: mongodb system
+  ansible.builtin.systemd:
+    state: started
+    name: mongodb
+    enabled: yes
+
+- name: Unarchive a file that needs to be downloaded and extract also
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/mongodb/archive/main.zip
+    dest: /tmp
+    remote_src: yes
