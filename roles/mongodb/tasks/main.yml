@@ -5,7 +5,7 @@
     baseurl: https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
 
 
-- name: install mongodb
+- name: Install MongoDB Package
   ansible.builtin.yum:
     name: mongodb-org
     state: installed
