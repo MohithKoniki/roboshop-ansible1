@@ -11,4 +11,8 @@
 - name: Include task list in play
   ansible.builtin.import_tasks: app.yml
 
+- name: Install node.js package.
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+
 

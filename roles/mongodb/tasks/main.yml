@@ -1,28 +1,26 @@
-- name: Setup MongoDB Repo
+- name: set mongo repo
   ansible.builtin.copy:
     src: mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo
+    dest: /etc/yum.repos.d/mongodb.repo
 
-
-- name: Install MongoDB Package
+- name: install mongodb
   ansible.builtin.yum:
-    name: mongodb-org
+    name: mongodb
     state: installed
 
-- name: update ip address
+- name: Replace old hostname with new hostname (requires Ansible >= 2.4)
   ansible.builtin.replace:
     path: /etc/mongod.conf
     regexp: 127.0.0.1
     replace: 0.0.0.0
 
-
-- name: mongodb system
+- name: start mongodb system service
   ansible.builtin.systemd:
-    state: started
-    name: mongodb
+    name: mongod
+    state: restarted
     enabled: yes
 
-- name: Unarchive a file that needs to be downloaded and extract also
+- name: schema files
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/mongodb/archive/main.zip
     dest: /tmp
