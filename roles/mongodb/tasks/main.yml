@@ -5,7 +5,7 @@
 
 - name: install mongodb
   ansible.builtin.yum:
-    name: mongodb
+    name: mongodb-org
     state: installed
 
 - name: Replace old hostname with new hostname (requires Ansible >= 2.4)
